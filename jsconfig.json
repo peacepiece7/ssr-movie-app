@@ -1,0 +1,11 @@
+{
+  // https://code.visualstudio.com/Docs/languages/javascript#_javascript-project-jsconfigjson
+  "compilerOptions": {
+    "baseUrl": ".",
+    // "module": "CommonJS",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
