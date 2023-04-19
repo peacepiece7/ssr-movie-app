@@ -6,7 +6,6 @@
  *
  */
 
-import { hydrateRoot } from 'react-dom/client'
-import App from './App'
-
-hydrateRoot(document, <App assets={window.assetManifest} />)
+export default function Layout({ children }) {
+  return <main>{children}</main>
+}

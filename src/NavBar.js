@@ -6,7 +6,10 @@
  *
  */
 
-import { hydrateRoot } from 'react-dom/client'
-import App from './App'
-
-hydrateRoot(document, <App assets={window.assetManifest} />)
+export default function NavBar() {
+  return (
+    <nav>
+      <a href='/'>Home</a>
+    </nav>
+  )
+}

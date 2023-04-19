@@ -1,17 +1,4 @@
 /**
- * ! 해당 스크립트 파일은 참고용으로 남겨둔 파일입니다. 안보셔도 됩니다!
- * 서버가 실행 될 때 번들링이 동시에 진행되는 스크립트 입니다.
- * package.json의 scripts를 아래와 같이 구성하고 해당 파일을 실행합니다.
- *
- * "scripts" : {
- *  "start:prod": "concurrently \"npm run server:prod\" \"npm run bundler:prod\"",
- *  "bundler:dev": "cross-env NODE_ENV=development nodemon -- scripts/build.js",
- *  "bundler:prod": "cross-env NODE_ENV=production nodemon -- scripts/build.js",
- *  ...Rest of scripts
- * }
- */
-
-/**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
