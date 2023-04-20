@@ -4,7 +4,7 @@
   "description": "",
   "main": ".babelrc.js",
   "scripts": {
-    "bundler:fe:dev": "cross-env NODE_ENV=development nodemon scripts/build.js -w ./src",
+    "bundler:fe:dev": "cross-env NODE_ENV=development node scripts/build.js",
     "bundler:fe:prod": "cross-env NODE_ENV=production node scripts/build.js",
     "bundler:server:dev": "webpack --config webpack.server.js -w",
     "bundler:server:prod": "webpack --config webpack.build.js",
