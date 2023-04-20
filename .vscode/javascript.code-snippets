@@ -22,6 +22,10 @@
     "body": ["import $0 from '$1'"],
     "scope": "javascript, typescript, javascriptreact, typescriptreact"
   },
+  "for loop": {
+    "prefix": "for",
+    "body": ["for (let i= 0, len= $0; i < len; i++) {\n  \n}"]
+  },
   "Try Catch Scope": {
     "prefix": "tc",
     "body": "try {\n  $0\n} catch (err) {\n  throw new Error(err)\n}",

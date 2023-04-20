@@ -14,6 +14,7 @@ const isProdMode = process.env.NODE_ENV === 'production' ? true : false
  */
 module.exports = {
   resolve: {
+  
     extensions: ['.js', '.jsx'], // 확장자가 생략되어 있으면 얘네가 있는지 확인해봐!
     // alias: {
     //   '@': path.resolve(__dirname, 'src'),

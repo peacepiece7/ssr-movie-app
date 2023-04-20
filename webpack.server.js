@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const serverConfig = {
   mode: 'development',
-  entry: './src/server/server.js',
+  entry: './server/server.js',
   target: 'node',
   externals: [nodeExternals()],
   output: {

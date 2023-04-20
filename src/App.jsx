@@ -30,6 +30,7 @@ export default function App({ assets }) {
 }
 
 function Content() {
+  const handleOnClickSuperVector = (e) => console.log(e.target.textContent)
   return (
     <Layout>
       <NavBar />
@@ -48,7 +49,7 @@ function Content() {
             <Comments />
           </Suspense>
         </section>
-        <h2>Thanks for reading!</h2>
+        <h2 onClick={handleOnClickSuperVector}>Super Vector</h2>
       </article>
     </Layout>
   )

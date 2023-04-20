@@ -6,11 +6,11 @@
  *
  */
 
-import * as React from 'react'
+import React from 'react'
 // import {renderToString} from 'react-dom/server';
 import { renderToPipeableStream } from 'react-dom/server'
 import App from '../src/App'
-import { DataProvider } from '../src/data'
+import { MovieProvider } from '../src/context/data'
 import { API_DELAY, ABORT_DELAY } from './delays'
 
 // In a real setup, you'd read it from webpack build stats.
@@ -25,9 +25,9 @@ export default function render(url, res) {
   // res.send(
   //   '<!DOCTYPE html>' +
   //   renderToString(
-  //     <DataProvider data={data}>
+  //     <MovieProvider data={data}>
   //       <App assets={assets} />
-  //     </DataProvider>,
+  //     </MovieProvider>,
   //   )
   // );
 
@@ -38,9 +38,9 @@ export default function render(url, res) {
   let didError = false
   const data = createServerData()
   const stream = renderToPipeableStream(
-    <DataProvider data={data}>
+    <MovieProvider data={data}>
       <App assets={assets} />
-    </DataProvider>,
+    </MovieProvider>,
     {
       bootstrapScripts: [assets['main.js']],
       onShellReady() {

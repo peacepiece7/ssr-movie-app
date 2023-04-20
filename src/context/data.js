@@ -13,10 +13,10 @@ import { createContext, useContext } from 'react'
 // while the cache is populated on the client. In a real app, you would
 // instead use a data fetching library or Server Components for this.
 
-const DataContext = createContext(null)
+const MovieContext = createContext(null)
 
-export function DataProvider({ children, data }) {
-  return <DataContext.Provider value={data}>{children}</DataContext.Provider>
+export function MovieProvider({ children, data }) {
+  return <MovieContext.Provider value={data}>{children}</MovieContext.Provider>
 }
 
 // In a real implementation the data would be streamed with the HTML.
@@ -27,8 +27,8 @@ const fakeData = [
   'I like marshmallows',
 ]
 
-export function useData() {
-  const ctx = useContext(DataContext)
+export function useMoviesData() {
+  const ctx = useContext(MovieContext)
   if (ctx !== null) {
     // This context is only provided on the server.
     // It is here to simulate a suspending data fetch.
