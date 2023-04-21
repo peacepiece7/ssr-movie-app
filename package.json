@@ -6,8 +6,8 @@
   "scripts": {
     "bundler:dev": "cross-env NODE_ENV=development nodemon -w ./src -w ./server ./scripts/build.js",
     "bundler:server": "cross-env NODE_ENV=production node ./scripts/build.js",
-    "start:server:dev": "cross-env NODE_ENV=development nodeon build-ssr/server.js",
-    "start:server:prod": "cross-env NODE_ENV=production nodemon build-ssr/server.js",
+    "start:server:dev": "cross-env NODE_ENV=development nodemon ./build-ssr/server.js",
+    "start:server:prod": "cross-env NODE_ENV=production nodemon ./build-ssr/server.js",
     "!!deprecated!!": "아래 scripts는 테스트용 코드입니다. 서버 환경 설정이 끝나면 삭제할 예정입니다",
     "bundler:fe:dev": "cross-env NODE_ENV=development nodemon -w ./src scripts/build.js",
     "bundler:fe:prod": "cross-env NODE_ENV=production node scripts/build.js",

@@ -13,10 +13,10 @@
 
 import { useMoviesData } from './context/data'
 import htmlEntitiesDecoder from 'html-entities-decoder'
-import Test from './Test'
+// import Test from './Test'
 
 export default function Comments() {
-  const movies = JSON.parse(htmlEntitiesDecoder(useMoviesData()))
+  let movies = JSON.parse(htmlEntitiesDecoder(useMoviesData()))
   const handleOnClick = (e) => {
     console.log(e.target.value)
   }
@@ -27,7 +27,7 @@ export default function Comments() {
           {movie.Title}
         </p>
       ))}
-      <Test comments={comments}></Test>
+      {/* <Test comments={comments}></Test> */}
     </>
   )
 }

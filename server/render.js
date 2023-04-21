@@ -4,6 +4,8 @@ import App from '../src/App'
 import { MovieProvider } from '../src/context/data'
 import { getSearchMovies } from '../service/api.js'
 import { API_DELAY, ABORT_DELAY } from './delays'
+import dotenv from 'dotenv'
+dotenv.config()
 
 let assets = {
   'main.js': '/main.js',
