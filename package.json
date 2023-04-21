@@ -4,13 +4,14 @@
   "description": "",
   "main": ".babelrc.js",
   "scripts": {
-    "bundler:fe:dev": "cross-env NODE_ENV=development node scripts/build.js",
+    "bundler:fe:dev": "cross-env NODE_ENV=development nodemon -w ./src scripts/build.js",
     "bundler:fe:prod": "cross-env NODE_ENV=production node scripts/build.js",
     "bundler:server:dev": "webpack --config webpack.server.js -w",
     "bundler:server:prod": "webpack --config webpack.build.js",
     "start:server:dev": "cross-env NODE_ENV=development nodemon -w ./.ssr-server-cache/**/* ./.ssr-server-cache/server.js",
     "build": "npm run bundler:fe:prod && npm run bundler:server:prod",
-    "start:server:prod": "cross-env NODE_ENV=production nodemon build-ssr/server.js"
+    "start:server:prod": "cross-env NODE_ENV=production nodemon build-ssr/server.js",
+    "bundler:server:sync:prod": "cross-env NODE_ENV=production nodemon --watch  ./build ./webpack.build.sync.js"
   },
   "keywords": [],
   "author": "",
