@@ -8,24 +8,8 @@
 
 [React 18 New Suspense SSR Demo](https://codesandbox.io/s/kind-sammet-j56ro?file=/src/index.js:267-278)
 
-# scripts
+[compression](https://velog.io/@onejaejae/Node-jsExpress-%EB%AF%B8%EB%93%A4%EC%9B%A8%EC%96%B4-%EC%82%AC%EC%9A%A9-body-paresr-compression)
 
-### start:sever:dev
+[babel-register 참고, 외에도 많은 바벨 관련 정보가 많습니다.](https://jbee.io/etc/Everything-about-babel/)
 
-- .ssr-server-cache/server.js 실행 및 감시
-
-### bundler:server:dev|prod
-
-server를 다시 빌드함
-todo :
-
-1. bulild파일이 변경될 경우 다시 빌드해야함
-
-### bundler:fe:dev
-
-fe를 ./src를 번들링 하여 ./build에 결과를 출력함 ./src가 변경될 경우 재빌드 함
-
-### start:sever:dev|prod
-
-server.js를 실행함
-dev모드시 ./build파일이 변경되면 재빌드
+[webpack-prefetch](https://velog.io/@minsu2344/Vue-router-%EC%84%A4%EC%A0%95%EC%9C%BC%EB%A1%9C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%AF%B8%EB%A6%AC-cache%EC%97%90-%EB%8B%B4%EC%95%84%EB%91%90%EA%B8%B0webpackChunkName-webpackPrefetch)
