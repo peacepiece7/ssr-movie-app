@@ -32,7 +32,9 @@ export function useMoviesData() {
   if (ctx !== null) {
     // This context is only provided on the server.
     // It is here to simulate a suspending data fetch.
-    ctx.read()
+    return ctx
   }
-  return fakeData
+  const serverData = document.getElementById('__SERVER_DATA__')?.textContent
+  if (serverData) return serverData
+  else return null
 }

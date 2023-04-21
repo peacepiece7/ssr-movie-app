@@ -1,52 +1,38 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import React from 'react'
-// import {renderToString} from 'react-dom/server';
 import { renderToPipeableStream } from 'react-dom/server'
 import App from '../src/App'
 import { MovieProvider } from '../src/context/data'
+import { getSearchMovies } from '../service/api.js'
 import { API_DELAY, ABORT_DELAY } from './delays'
 
-// In a real setup, you'd read it from webpack build stats.
 let assets = {
   'main.js': '/main.js',
   'main.css': '/main.css',
 }
 
-export default function render(url, res) {
-  // This is how you would wire it up previously:
-  //
-  // res.send(
-  //   '<!DOCTYPE html>' +
-  //   renderToString(
-  //     <MovieProvider data={data}>
-  //       <App assets={assets} />
-  //     </MovieProvider>,
-  //   )
-  // );
-
+export default async function render(url, res) {
   // The new wiring is a bit more involved.
   res.socket.on('error', (error) => {
     console.error('Fatal', error)
   })
   let didError = false
-  const data = createServerData()
+  // const data = createServerData()
+  // url.query
+  const searchData = await getSearchMovies()
+  const stringifySearchData = JSON.stringify(searchData)
   const stream = renderToPipeableStream(
-    <MovieProvider data={data}>
+    <MovieProvider data={stringifySearchData}>
       <App assets={assets} />
+      <script id='__SERVER_DATA__' type='application/json'>
+        {stringifySearchData}
+      </script>
     </MovieProvider>,
     {
       bootstrapScripts: [assets['main.js']],
       onShellReady() {
         // If something errored before we started streaming, we set the error code appropriately.
         res.statusCode = didError ? 500 : 200
-        res.setHeader('Content-type', 'text/html')
+        res.setHeader('Content-type', 'text/html;charset=UTF-8')
         stream.pipe(res)
       },
       onError(x) {
