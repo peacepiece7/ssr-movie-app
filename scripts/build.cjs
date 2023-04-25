@@ -4,12 +4,19 @@ const path = require('path')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
+// * js는 차후 optimization할 예정입니다.
+// const TerserPlugin = require('terser-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 function bundleFrontApp(callback) {
+  console.log('start bundling')
   rimraf.sync(path.resolve(__dirname, '../build'))
   const config = {
     mode: process.env.NODE_ENV,
     devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-module-source-map',
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
     entry: [path.resolve(__dirname, '../src/index.js')],
     output: {
       path: path.resolve(__dirname, '../build'),
@@ -18,10 +25,31 @@ function bundleFrontApp(callback) {
     module: {
       rules: [
         {
+          test: /\.css?$/,
+          exclude: [],
+          use: ['style-loader', 'css-loader', 'postcss-loader'],
+        },
+        {
           test: /\.jsx?$|\.tsx?$/,
           use: 'babel-loader',
           exclude: /node_modules/,
         },
+        {
+          test: /\.css$/,
+          use: [
+            // process.env === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'postcss-loader',
+          ],
+        },
+      ],
+    },
+    plugins: [new MiniCssExtractPlugin()],
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new CssMinimizerPlugin(), // 따로 옵션을 제공하지 않아도 주석 및 공백 제거를 해줍니다.
       ],
     },
   }
@@ -43,25 +71,23 @@ function bundleFrontServer() {
     entry: path.join(__dirname, '..', 'server', 'server.js'),
     target: 'node',
     externals: [webpackNodeExternals()],
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
     output: {
       path: path.join(__dirname, '..', 'build-ssr'),
       filename: 'server.js',
     },
-    resolve: {
-      extensions: ['.js', '.jsx'],
-    },
     module: {
       rules: [
-        { test: /\.(js|jsx)$/, use: 'babel-loader' },
+        { test: /\.jsx?$|\.tsx?$/, use: 'babel-loader' },
         { test: /\.(png|woff|woff2|eot|ttf|svg|jpg|jpeg)$/, use: 'url-loader' },
-        { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
       ],
     },
     plugins: [
       new webpack.ProvidePlugin({
         React: 'react',
       }),
-      new MiniCssExtractPlugin(),
       new CopyPlugin({
         patterns: [{ from: 'build', to: '.' }],
       }),
@@ -74,7 +100,7 @@ function bundleFrontServer() {
       info.errors.forEach((e) => console.error(e))
       process.exit(1)
     }
-    console.log('Finished bundling front server')
+    console.log('Finished bundling front server\n')
   })
 }
 
