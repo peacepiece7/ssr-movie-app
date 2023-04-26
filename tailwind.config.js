@@ -9,9 +9,9 @@ module.exports = {
       xl: '1440px',
     },
     colors: {
-      'c-bg': '#f5f5f4', // * background
+      'c-bg': '#fefefe', // * background
       'c-tt': '#1e293b', // * title
-      'c-d': '#374151', // * description
+      'c-d': '#525964', // * description
       'c-h': '#06b6d4', // * highlight
     },
   },

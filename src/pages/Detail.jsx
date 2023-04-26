@@ -49,47 +49,58 @@ export default function Detail() {
   return (
     <Layout>
       <main className="flex justify-center">
-        <div className="poster">
-          <img
-            src={movie.Poster === 'N/A' ? '/noImage.png' : movie.Poster}
-            alt={`${movie.Title} Poster`}
-            onError={(e) => {
-              e.target.src = '/noImage.png'
-            }}
-          />
-        </div>
-        <div>
-          <h1>{movie.Title}</h1>
-          <div>
-            <span>
-              {movie.Released} - {movie.Runtime} - {movie.Country}
-            </span>
+        <div className="min-w-[50%]">
+          <div className="mr-8 ">
+            <img
+              src={movie.Poster === 'N/A' ? '/noImage.png' : movie.Poster}
+              alt={`${movie.Title} Poster`}
+              onError={(e) => {
+                e.target.src = '/noImage.png'
+              }}
+              className="w-full rounded-2xl"
+            />
           </div>
-          <div>{movie.Plot}</div>
+        </div>
+        <div className="min-w-[50%]">
+          <h1 className="text-4xl text-c-tt tracking-widest mb-10">{movie.Title}</h1>
           <div>
-            <h2>Ratings</h2>
-            <ul>
+            <div className="text-c-h mb-4">
+              <span className="after:content-['-'] after:ml-2 after:mr-2 after:text-[#000]">{movie.Released}</span>
+              <span className="after:content-['-'] after:ml-2 after:mr-2">{movie.Runtime}</span>
+              <span className="after:content-['-'] after:ml-2 after:mr-2">{movie.Country}</span>
+            </div>
+          </div>
+          <div className="text-c-d mb-4 plot">{movie.Plot}</div>
+          <div>
+            <h2 className="text-2xl text-c-tt tracking-widest mb-1">Ratings</h2>
+            <ul className="flex  mb-4">
               {movie.Ratings.map((rating) => (
-                <li key={rating.Value}>
-                  <img src={rating.SourceImage === 'N/A' ? '/noImage.png' : rating.SourceImage} alt={rating.Source} />
+                <li key={rating.Value} className="flex items-center mr-5">
+                  <div className="w-10 h-8 mr-2">
+                    <img
+                      src={rating.SourceImage === 'N/A' ? '/noImage.png' : rating.SourceImage}
+                      alt={rating.Source}
+                      className="mr-9"
+                    />
+                  </div>
                   <span>{rating.Value}</span>
                 </li>
               ))}
             </ul>
-            <div>
-              <h2>Actor</h2>
+            <div className="mb-4">
+              <h2 className="text-2xl text-c-tt tracking-widest mb-1">Actor</h2>
               <div>{movie.Actors}</div>
             </div>
-            <div>
-              <h2>Director</h2>
+            <div className="mb-4">
+              <h2 className="text-2xl text-c-tt tracking-widest mb-1">Director</h2>
               <div>{movie.Director}</div>
             </div>
-            <div>
-              <h2>Production</h2>
+            <div className="mb-4">
+              <h2 className="text-2xl text-c-tt tracking-widest mb-1">Production</h2>
               <div>{movie.Production}</div>
             </div>
-            <div>
-              <h2>Genre</h2>
+            <div className="mb-4">
+              <h2 className="text-2xl text-c-tt tracking-widest mb-1">Genre</h2>
               <div>{movie.Genre}</div>
             </div>
           </div>

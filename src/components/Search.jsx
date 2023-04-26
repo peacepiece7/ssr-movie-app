@@ -22,6 +22,7 @@ export default function Search({ onSearch }) {
     e.preventDefault()
     onSearch(`s=${encodeURIComponent(text)}${year ? `&y=${year}` : ''}${genre ? `&type=${genre}` : ''}`)
   }
+
   const setInputText = (e) => {
     setText(() => e.target.value.trim())
   }
@@ -33,15 +34,34 @@ export default function Search({ onSearch }) {
     setYear(() => e.target.value.trim())
   }
   return (
-    <form onSubmit={handleSubmitSearchForm}>
-      <input type="text" onChange={setInputText} defaultValue={text} autoComplete="true" />
-      <select name="genre" onChange={setSelecedGenre} defaultValue={genre}>
-        <option value="">no-chice</option>
+    <form onSubmit={handleSubmitSearchForm} className="flex justify-start content-center h-[120px] text-sm">
+      <input
+        type="text"
+        onChange={setInputText}
+        defaultValue={text}
+        autoComplete="true"
+        className={`mr-4 h-12 pl-3 shadow-md rounded-md grow cursor-pointer outline-none tracking-widest
+        hover:shadow-lg transition duration-150 ease-out`}
+      />
+      <select
+        name="genre"
+        onChange={setSelecedGenre}
+        defaultValue={genre}
+        className={`mr-4 h-12 min-w-[120px] shadow-md rounded-md cursor-pointer outline-none tracking-widest
+        hover:shadow-lg transition duration-150 ease-out`}
+      >
+        <option value="">no-choice</option>
         <option value="movie">movie</option>
         <option value="series">series</option>
         <option value="episode">episode</option>
       </select>
-      <select name="year" onChange={setSelecedYear} defaultValue={year}>
+      <select
+        name="year"
+        onChange={setSelecedYear}
+        defaultValue={year}
+        className={`mr-12 h-12 min-w-[100px] shadow-md rounded-md cursor-pointer outline-none tracking-widest
+        hover:shadow-lg transition duration-150 ease-out`}
+      >
         <option value="">all</option>
         {yearOptions.map((yr) => (
           <option key={yr} value={yr}>
@@ -49,7 +69,16 @@ export default function Search({ onSearch }) {
           </option>
         ))}
       </select>
-      <input type="submit" value="Search" />
+      <input
+        type="submit"
+        value="Search"
+        draggable="false"
+        className={`text-c-h h-12 w-40
+        border-none border-c-d border-[1px] rounded-md 
+        pl-2 pr-2 pt-1 pb-1 shadow-md cursor-pointer outline-none tracking-widest
+        hover:shadow-lg transition duration-150 ease-out
+       `}
+      />
     </form>
   )
 }

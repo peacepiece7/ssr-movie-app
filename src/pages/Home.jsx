@@ -23,32 +23,40 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (isBottom && isSuccess && hasNextPage) fetchNextPage()
+    if (isBottom && isSuccess && hasNextPage) {
+      fetchNextPage()
+    }
   }, [isBottom])
 
-  const GetNextMovies = () => {
-    fetchNextPage()
-  }
   return (
     <Layout>
       <main>
-        <h1>OMDb API THE OPEN MOVIE DATABASE</h1>
-        <p className="underline">
-          The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are
-          contributed and maintained by our users.
-        </p>
-        <p>If you find this service useful, please consider making a one-time donation or become a patron.</p>
+        <h1 className="text-4xl text-c-tt tracking-widest mb-10">
+          <p>OMDb API</p>
+          <p>THE OPEN MOVIE DATABASE</p>
+        </h1>
+        <div>
+          <p className="w-10/12 mb-2 ">
+            The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are
+            contributed and maintained by our users.
+          </p>
+          <p className="w-10/12 mb-8 ">
+            If you find this service useful, please consider making a one-time donation or become a patron.
+          </p>
+        </div>
         <Search onSearch={handleOnSearch} />
-        <section>
-          <h2>SearchList</h2>
+        <section className="min-h-[240px] shadow-md rounded-md p-2">
+          <h2 className="text-2xl text-c-tt tracking-widest mb-10">Search List</h2>
           {isLoading && <Spinner />}
-          {isSuccess ? <SearchList movies={movies} /> : <div>Search for the movie title</div>}
-          {isFetchingNextPage && <Spinner />}
+          {isSuccess ? (
+            <SearchList movies={movies} />
+          ) : (
+            <div className="text-c-d mb-10 opacity-80">Search for the movie title</div>
+          )}
+          {isFetchingNextPage && <Spinner pos="fixed left-0 right-0 bottom-[165px]" />}
+          {hasNextPage && <div className="h-[70px]" />}
         </section>
       </main>
-      <button type="button" onClick={GetNextMovies}>
-        get next data
-      </button>
     </Layout>
   )
 }
