@@ -5,6 +5,7 @@ import Error from './components/Error'
 import Spinner from './components/Spinner'
 
 import Home from './pages/Home'
+import About from './pages/About'
 
 const Detail = lazy(() => import('./pages/Detail'))
 
@@ -22,6 +23,7 @@ export default function App() {
           </Suspense>
         }
       />
+      <Route path="/about" element={<About />} />
     </Routes>
   )
 }

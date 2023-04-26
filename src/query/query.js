@@ -26,7 +26,6 @@ export const getSearchInfitieMovies = (query) =>
     [`2${query}`],
     async ({ pageParam = 1 }) => {
       try {
-        console.log(`https://omdbapi.com/?apikey=7035c60c&${query}&page=${pageParam}`)
         const { data } = await axios({
           url: `https://omdbapi.com/?apikey=7035c60c&${query}&page=${pageParam}`,
           method: 'GET',

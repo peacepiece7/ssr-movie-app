@@ -2,9 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function SearchList({ movies }) {
-  console.log(movies)
   if (movies.pages[0].length === 0) {
-    return <div>Moive Not Found! please check the spell</div>
+    return (
+      <p className="absolute w-fit h-0 inset-0 m-auto text-c-d text-xl tracking-widest opacity-40">
+        Moive Not Found! Please check the spell
+      </p>
+    )
   }
   return (
     <ul className="grid xl:grid-cols-5 lg:grid-cols-4 grid-cols-3">
@@ -14,7 +17,7 @@ export default function SearchList({ movies }) {
             <li
               key={movie.imdbID}
               className={`flex justify-center mb-3 shadow-sm 
-              hover:shadow-lg transition duration-150 ease-out`}
+              hover:shadow-lg transition duration-150 ease-out rounded-b-sm`}
             >
               <a
                 href={`/detail?id=${movie.imdbID}`}
@@ -30,7 +33,7 @@ export default function SearchList({ movies }) {
                     e.target.onerror = null
                     e.target.src = '/noImage.png'
                   }}
-                  className="scale-100 hover:scale-[1.01] transition duration-150 ease-out"
+                  className="scale-100 hover:scale-[1.02] transition duration-150 ease-out rounded-t-sm"
                 />
                 <div className="description">
                   <p>{movie.Year}</p>

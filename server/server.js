@@ -1,6 +1,8 @@
 import express from 'express'
 import compress from 'compression'
-import render from './render'
+import renderHome from './render/renderHome'
+import renderDetail from './render/renderDetail'
+import renderAbout from './render/renderAbout'
 
 const PORT = process.env.PORT || 4000
 const app = express()
@@ -15,7 +17,16 @@ app.use(express.static('public'))
 // * Home 페이지로 이동합니다.
 app.use('/', (req, res) => {
   // todo : 이 곳에 어던 페이지에서 render를 요청했다는 코드가 들어가야합니다. 그래야 페이지마다 SSR이 가능합니다.
-  render(req.url, req, res)
+  if (req.path.endsWith('/')) {
+    return renderHome(req.url, req, res)
+  }
+  if (req.path.endsWith('/detail')) {
+    return renderDetail(req.url, req, res)
+  }
+  if (req.path.endsWith('/about')) {
+    return renderAbout(req.url, req, res)
+  }
+  return res.status(404).send('Not found!')
 })
 
 app

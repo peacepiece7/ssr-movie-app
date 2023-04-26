@@ -33,7 +33,6 @@ import Layout from '../layouts/Layout'
  * @property {string} Production
  * @property {string} Website
  * @property {string} Response
-
  */
 
 export default function Detail() {
@@ -76,13 +75,13 @@ export default function Detail() {
             <ul className="flex  mb-4">
               {movie.Ratings.map((rating) => (
                 <li key={rating.Value} className="flex items-center mr-5">
-                  <div className="w-10 h-8 mr-2">
+                  <span>
                     <img
                       src={rating.SourceImage === 'N/A' ? '/noImage.png' : rating.SourceImage}
                       alt={rating.Source}
-                      className="mr-9"
+                      className="mr-3 h-[27px]"
                     />
-                  </div>
+                  </span>
                   <span>{rating.Value}</span>
                 </li>
               ))}

@@ -2,54 +2,21 @@ import React from 'react'
 import { renderToPipeableStream } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
 import dotenv from 'dotenv'
-
 import { QueryClient, QueryClientProvider } from 'react-query'
-import App from '../src/App'
-import { MovieProvider } from '../src/context/movieContext'
 
-import { getSearchMovies, getMovieDetailById } from '../service/api'
-
+import App from '../../src/App'
+import { MovieProvider } from '../../src/context/movieContext'
+import { ABORT_DELAY } from '../delays'
 /**
- * * 서버에서 라우터 정보를 react-router-dom에게 보냅니다.
- * * StaticRouter가 없다면 SSR시 StaticRouter가 감싸는 컴포넌트 내에서 useRoutes context를 사용할 수 없습니다.
+ * * react-router-dom ssr, csr
  * * StaticRouter(서버 라우터) == BrowserRouter(클라이언트 라우터)
  */
-import { ABORT_DELAY } from './delays'
 
 dotenv.config()
 
 const assets = {
   'main.js': '/main.js',
   'main.css': '/main.css',
-}
-function createDelay() {
-  let done = false
-  let promise = null
-  let testData = ''
-  return {
-    read() {
-      if (done) {
-        return testData
-      }
-      if (promise) {
-        throw promise
-      }
-      promise = new Promise((resolve) => {
-        getSearchMovies().then((res) => {
-          testData = res
-          done = true
-          resolve()
-        })
-        setTimeout(() => {
-          done = true
-          promise = null
-          testData = 'foo'
-          resolve()
-        }, 9000)
-      })
-      throw promise
-    },
-  }
 }
 
 /**
@@ -58,16 +25,12 @@ function createDelay() {
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-export default async function render(url, req, res) {
+export default async function renderHome(url, req, res) {
   res.socket.on('error', (error) => {
     console.error('soket연결에 실패했습니다.\n', error)
   })
   let didError = false
 
-  // * 필요없어진 코드입니다.
-  // const searchData = await getSearchMovies(req.query)
-  // const stringifySearchData = JSON.stringify(searchData)
-  // *
   /**
    * @description react 18이전엔 아래와 같이 사용했습니다.
    * @example import {renderToString} from 'react-dom/server';
@@ -79,36 +42,9 @@ export default async function render(url, req, res) {
    *     </DataProvider>,
    *   )
    */
-  const delay = createDelay()
   const data = {
-    delay,
     data: '',
   }
-
-  if (req.path.endsWith('detail')) {
-    const movieDetailData = await getMovieDetailById(req.query.id)
-
-    movieDetailData.Ratings.map((rating) => {
-      switch (rating.Source) {
-        case 'Internet Movie Database':
-          rating.SourceImage = '/imdb_icon.png'
-          break
-        case 'Rotten Tomatoes':
-          rating.SourceImage = '/rotten_icon.png'
-          break
-        case 'Metacritic':
-          rating.SourceImage = '/matatric_icon.png'
-          break
-        default:
-          rating.SourceImage = '/noImage.png'
-          break
-      }
-      return rating
-    })
-
-    data.data = JSON.stringify(movieDetailData)
-  }
-
   const queryClient = new QueryClient()
 
   const stream = renderToPipeableStream(
@@ -120,7 +56,12 @@ export default async function render(url, req, res) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="stylesheet" href={assets['main.css']} />
             <link rel="icon" type="image/png" href="/favicon.png" />
-            <title>Movie App</title>
+            <title>MOVIE DATABASE</title>
+            <meta
+              name="description"
+              content="Currently over 280,000 posters, updated daily with resolutions up to 2000x3000."
+            />
+            <meta name="Keywords" content="movie, episode, serise, omdb, movie poster,movie plot" />
           </head>
           <body>
             <noscript
@@ -169,3 +110,35 @@ export default async function render(url, req, res) {
   // 충분한 시간이(현제 10초) 지나면 SSR을 포기하고 CSR으로 전환합니다.
   setTimeout(() => stream.abort(), ABORT_DELAY)
 }
+
+/*
+function createDelay() {
+    let done = false
+    let promise = null
+    let testData = ''
+    return {
+      read() {
+        if (done) {
+          return testData
+        }
+        if (promise) {
+          throw promise
+        }
+        promise = new Promise((resolve) => {
+          getSearchMovies().then((res) => {
+            testData = res
+            done = true
+            resolve()
+          })
+          setTimeout(() => {
+            done = true
+            promise = null
+            testData = 'foo'
+            resolve()
+          }, 9000)
+        })
+        throw promise
+      },
+    }
+  }
+  */

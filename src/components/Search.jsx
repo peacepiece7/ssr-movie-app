@@ -47,7 +47,7 @@ export default function Search({ onSearch }) {
         name="genre"
         onChange={setSelecedGenre}
         defaultValue={genre}
-        className={`mr-4 h-12 min-w-[120px] shadow-md rounded-md cursor-pointer outline-none tracking-widest
+        className={`mr-4 h-12 p-2 min-w-[120px] shadow-md rounded-md cursor-pointer outline-none tracking-widest
         hover:shadow-lg transition duration-150 ease-out`}
       >
         <option value="">no-choice</option>
@@ -59,7 +59,7 @@ export default function Search({ onSearch }) {
         name="year"
         onChange={setSelecedYear}
         defaultValue={year}
-        className={`mr-12 h-12 min-w-[100px] shadow-md rounded-md cursor-pointer outline-none tracking-widest
+        className={`mr-12 h-12 p-2 min-w-[100px] shadow-md rounded-md cursor-pointer outline-none tracking-widest
         hover:shadow-lg transition duration-150 ease-out`}
       >
         <option value="">all</option>
@@ -73,7 +73,7 @@ export default function Search({ onSearch }) {
         type="submit"
         value="Search"
         draggable="false"
-        className={`text-c-h h-12 w-40
+        className={`text-c-h h-12 w-40 bg-[#fff]
         border-none border-c-d border-[1px] rounded-md 
         pl-2 pr-2 pt-1 pb-1 shadow-md cursor-pointer outline-none tracking-widest
         hover:shadow-lg transition duration-150 ease-out

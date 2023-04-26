@@ -45,16 +45,20 @@ export default function Home() {
           </p>
         </div>
         <Search onSearch={handleOnSearch} />
-        <section className="min-h-[240px] shadow-md rounded-md p-2">
-          <h2 className="text-2xl text-c-tt tracking-widest mb-10">Search List</h2>
-          {isLoading && <Spinner />}
-          {isSuccess ? (
-            <SearchList movies={movies} />
-          ) : (
-            <div className="text-c-d mb-10 opacity-80">Search for the movie title</div>
-          )}
-          {isFetchingNextPage && <Spinner pos="fixed left-0 right-0 bottom-[165px]" />}
-          {hasNextPage && <div className="h-[70px]" />}
+        <section>
+          <h2 className="text-2xl text-c-tt tracking-widest mb-2">Search List</h2>
+          <div className="relative min-h-[240px] bg-[#fff] p-2 rounded-lg shadow-md">
+            {isLoading && <Spinner />}
+            {isSuccess ? (
+              <SearchList movies={movies} />
+            ) : (
+              <p className="absolute w-fit h-0 inset-0 m-auto text-c-d text-xl tracking-widest opacity-40">
+                Search for the movie title
+              </p>
+            )}
+            {isFetchingNextPage && <Spinner pos="fixed left-0 right-0 bottom-[225px]" />}
+            {hasNextPage && <div className="h-[120px]" />}
+          </div>
         </section>
       </main>
     </Layout>
