@@ -48,10 +48,9 @@ export default function Home() {
         <section>
           <h2 className="text-2xl text-c-tt tracking-widest mb-2">Search List</h2>
           <div className="relative min-h-[240px] bg-[#fff] p-2 rounded-lg shadow-md">
-            {isLoading && <Spinner />}
-            {isSuccess ? (
-              <SearchList movies={movies} />
-            ) : (
+            {isLoading && <Spinner pos="mt-24" />}
+            {isSuccess && <SearchList movies={movies} />}
+            {!isSuccess && !isLoading && (
               <p className="absolute w-fit h-0 inset-0 m-auto text-c-d text-xl tracking-widest opacity-40">
                 Search for the movie title
               </p>

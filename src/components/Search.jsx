@@ -40,6 +40,7 @@ export default function Search({ onSearch }) {
         onChange={setInputText}
         defaultValue={text}
         autoComplete="true"
+        minLength={3}
         className={`mr-4 h-12 pl-3 shadow-md rounded-md grow cursor-pointer outline-none tracking-widest
         hover:shadow-lg transition duration-150 ease-out`}
       />

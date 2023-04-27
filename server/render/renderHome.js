@@ -5,7 +5,6 @@ import dotenv from 'dotenv'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import App from '../../src/App'
-import { MovieProvider } from '../../src/context/movieContext'
 import { ABORT_DELAY } from '../delays'
 /**
  * * react-router-dom ssr, csr
@@ -42,55 +41,43 @@ export default async function renderHome(url, req, res) {
    *     </DataProvider>,
    *   )
    */
-  const data = {
-    data: '',
-  }
+
   const queryClient = new QueryClient()
 
   const stream = renderToPipeableStream(
-    <MovieProvider data={data}>
-      <QueryClientProvider client={queryClient}>
-        <html lang="en">
-          <head>
-            <meta charSet="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="stylesheet" href={assets['main.css']} />
-            <link rel="icon" type="image/png" href="/favicon.png" />
-            <title>MOVIE DATABASE</title>
-            <meta
-              name="description"
-              content="Currently over 280,000 posters, updated daily with resolutions up to 2000x3000."
-            />
-            <meta name="Keywords" content="movie, episode, serise, omdb, movie poster,movie plot" />
-          </head>
-          <body>
-            <noscript
-              dangerouslySetInnerHTML={{
-                __html: `<b>Enable JavaScript to run this app.</b>`,
-              }}
-            />
-          </body>
-          <div id="root">
-            <StaticRouter location={url}>
-              <App assets={assets} />
-            </StaticRouter>
-            {/* NextJS 12버전에서 SSR시 html 최하단에 서버 데이터를 stringify해서 삽입하는 전략을 따라했습니다. */}
-          </div>
-          {data.data && (
-            <script id="__SERVER_DATA__" type="application/json">
-              {data.data}
-            </script>
-          )}
-          {/* // ? 이 부분에 삽입된 데이터는 HTML Entity가 되는데 변환시키지 않고 보낼 방법을 아직 못 찾았습니니다. 
-        (추가적으로 decode해줘야하기 떄문에 변환시키지 않아도 되는 방법이 필요할 것 같습니다.) */}
-          <script
+    <QueryClientProvider client={queryClient}>
+      <html lang="en">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="stylesheet" href={assets['main.css']} />
+          <link rel="icon" type="image/png" href="/favicon.png" />
+          <title>MOVIE DATABASE</title>
+          <meta
+            name="description"
+            content="Currently over 280,000 posters, updated daily with resolutions up to 2000x3000."
+          />
+          <meta name="Keywords" content="movie, episode, serise, omdb, movie poster,movie plot" />
+        </head>
+        <body>
+          <noscript
             dangerouslySetInnerHTML={{
-              __html: `assetManifest = ${JSON.stringify(assets)};`,
+              __html: `<b>Enable JavaScript to run this app.</b>`,
             }}
           />
-        </html>
-      </QueryClientProvider>
-    </MovieProvider>,
+        </body>
+        <div id="root">
+          <StaticRouter location={url}>
+            <App assets={assets} />
+          </StaticRouter>
+        </div>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `assetManifest = ${JSON.stringify(assets)};`,
+          }}
+        />
+      </html>
+    </QueryClientProvider>,
     {
       // SSR시 bootstrapScripts를 지정해줘야 서버에서 js파일을 먼저 로드합니다.
       bootstrapScripts: [assets['main.js']],
@@ -112,6 +99,9 @@ export default async function renderHome(url, req, res) {
 }
 
 /*
+STREAM SSR 패칭 전략입니다.
+데이터 패칭 시 서버 컴포넌트가 Promise<pending>을 반환하면 Resolve될 떄 까지 비동기적으로 기다리다가, 패칭이 완료되고 랜더링 되면 hydration을 진행합니다.
+
 function createDelay() {
     let done = false
     let promise = null

@@ -86,7 +86,6 @@ export default async function renderDetail(url, req, res) {
               {data.data}
             </script>
           )}
-
           <script
             dangerouslySetInnerHTML={{
               __html: `assetManifest = ${JSON.stringify(assets)};`,

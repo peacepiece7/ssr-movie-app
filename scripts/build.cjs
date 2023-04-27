@@ -10,9 +10,15 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 function bundleFrontApp(callback) {
   console.log('start bundling')
-  rimraf.sync(path.resolve(__dirname, '../build'))
+  if (process.env.NODE_ENV === 'production') {
+    // production 모드일 경우 build파일을 삭제합니다. (webpack의 clean옵션이랑 같습니다.)
+    rimraf.sync(path.resolve(__dirname, '../build'))
+    rimraf.sync(path.resolve(__dirname, '../build-ssr'))
+  }
   const config = {
+    // https://webpack.kr/configuration/mode/
     mode: process.env.NODE_ENV,
+    // https://webpack.kr/configuration/devtool/
     devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-module-source-map',
     resolve: {
       extensions: ['.js', '.jsx'],
@@ -53,6 +59,7 @@ function bundleFrontApp(callback) {
       ],
     },
   }
+
   webpack(config, (err, stats) => {
     if (stats.hasErrors()) {
       console.error(err)
