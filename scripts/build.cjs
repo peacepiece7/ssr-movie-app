@@ -5,7 +5,7 @@ const rimraf = require('rimraf')
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
 // * js는 차후 optimization할 예정입니다.
-// const TerserPlugin = require('terser-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 function bundleFrontApp(callback) {
@@ -55,7 +55,11 @@ function bundleFrontApp(callback) {
     optimization: {
       minimize: true,
       minimizer: [
-        new CssMinimizerPlugin(), // 따로 옵션을 제공하지 않아도 주석 및 공백 제거를 해줍니다.
+        // css를 최적화 해줍니다. 대부분 필요한 기능은 default값에 포함되어 있습니다.
+        new CssMinimizerPlugin(),
+        //js를 최적화 해줍니다. 대부분 필요한 기능은 default값에 포함되어 있습니다.
+        // https://www.npmjs.com/package/terser-webpack-plugin
+        new TerserPlugin(),
       ],
     },
   }
