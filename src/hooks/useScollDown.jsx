@@ -5,7 +5,7 @@ export default function useScollDown() {
 
   function getScrollY() {
     const buttonPos = document.querySelector('html').scrollHeight - document.querySelector('html').clientHeight
-    if (buttonPos - window.scrollY < 5) {
+    if (buttonPos - window.scrollY < 20) {
       setIsBottom(true)
     } else {
       setIsBottom(false)

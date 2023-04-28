@@ -12,22 +12,22 @@ export default function NavBar() {
           <img src="/logo_nbg.png" alt="logo" className="max-w-20 max-h-20" />
         </a>
         <nav>
-          <a href="/" className="ml-6 mr-6 text-sm tracking-widest">
+          <a href="/" className="ml-3 mr-3 md:ml-6 md:mr-6 text-sm tracking-widest">
             HOME
           </a>
-          <a href="/detail?id=tt10954600" className="mr-6 text-sm tracking-widest">
+          <a href="/detail?id=tt10954600" className="mr-3 md:mr-6 text-sm tracking-widest">
             DETAIL
           </a>
-          <a href="/about" className="mr-6 text-sm tracking-widest">
+          <a href="/about" className="mr-3 md:mr-6 text-sm tracking-widest">
             ABOUT
           </a>
         </nav>
       </div>
-      <div className="mr-6">
+      <div className="mr-6 md:block hidden">
         <img
           src="https://avatars.githubusercontent.com/u/73880776?s=400&u=1ce40dd704a71a9f5ce3f80cbf19092032f2df14&v=4"
           alt="writer profile"
-          className="w-[30px] h-[30px] rounded-[15px] "
+          className="w-[30px] h-[30px] rounded-[15px]"
         />
       </div>
     </header>

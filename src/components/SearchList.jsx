@@ -23,17 +23,17 @@ export default function SearchList({ movies }) {
                 href={`/detail?id=${movie.imdbID}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-block w-[200px]"
+                className="inline-block text-center w-[200px]"
               >
                 <img
                   src={movie.Poster === 'N/A' ? '/noImage.png' : movie.Poster}
-                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
                   alt="Movie Poster"
                   onError={(e) => {
                     e.target.onerror = null
                     e.target.src = '/noImage.png'
                   }}
-                  className="scale-100 hover:scale-[1.02] transition duration-150 ease-out rounded-t-sm"
+                  className={`inline-block scale-100 w-[133px] h-[200px] md:w-[200px] md:h-[300px] object-cover hover:scale-[1.02]
+                  transition duration-150 ease-out rounded-t-sm`}
                 />
                 <div className="description">
                   <p>{movie.Year}</p>

@@ -47,9 +47,9 @@ export default function Detail() {
 
   return (
     <Layout>
-      <main className="flex justify-center">
-        <div className="min-w-[50%]">
-          <div className="mr-8 text-right">
+      <main className="flex md:flex-row md:justify-center md:items-stretch flex-col items-center">
+        <div className="min-w-[50%] mb-12 md:mb-0">
+          <div className="md:mr-8 text-right">
             <picture>
               <source
                 srcSet={movie.Poster === 'N/A' ? '/noImage.png' : movie.Poster.replace('._V1_SX300.', '._V1_SX700.')}
@@ -67,7 +67,7 @@ export default function Detail() {
           </div>
         </div>
         <div className="min-w-[50%]">
-          <h1 className="text-4xl text-c-tt tracking-widest mb-10">{movie.Title}</h1>
+          <h1 className="md:text-left text-center text-4xl text-c-tt tracking-widest mb-10">{movie.Title}</h1>
           <div>
             <div className="text-c-h mb-4">
               <span className="after:content-['-'] after:ml-2 after:mr-2 after:text-[#000]">{movie.Released}</span>
