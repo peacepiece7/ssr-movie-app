@@ -17,6 +17,7 @@
 - [x] 영화 목록을 검색하는 동안 로딩 애니메이션이 보이도록 만들어보세요.
 - [x] 무한 스크롤 기능을 추가해서 추가 영화 목록을 볼 수 있도록 만들어보세요.
 - [x] 영화 포스터가 없을 경우 대체 이미지를 출력하도록 만들어보세요.
+- [x] 영화 상세정보 포스터를 고해상도로 출력해보세요. (실시간 이미지 리사이징)
 - [x] 차별화가 가능하도록 프로젝트를 최대한 예쁘게 만들어보세요.
 - [x] API 기본 사용법
 
@@ -32,7 +33,7 @@
 
 1. webpack-dev-server는 번들링 결과를 캐싱하여 개발 서버를 제공해주는데
    webpack-dev-server로 서버를 번들링하여 결과물을 개발 서버를 제공해줄 수 있는 방법을 못찾았습니다.
-2. 프론트 서버와 프론트 리액트 앱 번들링을 순차적으로 진행하야하는데 두 entry는 rules가 달라야합니다. entry마다 rules를 다르게 설정하여 번들링하는 방법을 찾지 못했습니다.
+2. 프론트 서버와 프론트 리액트 앱 총 두개의 entry가 있는데 각각의 entry는 rules가 달라야합니다. entry마다 rules를 다르게 설정하여 번들링하는 방법을 찾지 못했습니다.
 
 ### 2. React 18의 Suspense를 사용하지 못했습니다.
 
@@ -43,14 +44,6 @@ React18의 Steaming SSR은 서버 컴포넌트의 랜더링이 비동기적으�
 1. /detail 페이지로 요청이 들어올 떄, 서버에서 OMDB로 API를 보냅니다. 이떄 서버 컴포넌트는 로딩창(fallback)을 클라이언트에 제공하도록 만들고 싶은데 데이터 패칭 전략을 어떻게 해야할지 잘 모르겠습니다.
 
 그래서 nextjs12 버전에서 SSR하는 방식으로 대체 해놓은 상태입니다.
-
-### 3. 실시간 이미지 리사이징
-
-실시간 이미지 리사이징이 선택과제에 있었는데,
-
-[heropy님의 실시간 이미지 리사이징 블로그](https://heropy.blog/2019/07/21/resizing-images-cloudfrount-lambda/)처럼 구현은 힘들 것 같아서
-
-picture태그와 이미지 CDN의 쿼리 스트링을 변경하는 방식을 생각 중 입니다.
 
 # Reference
 
@@ -74,3 +67,5 @@ picture태그와 이미지 CDN의 쿼리 스트링을 변경하는 방식을 생
 [css minimize webpack plugin](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/)
 
 [webpack hot reload(미적용)](https://webpack.kr/guides/hot-module-replacement/)
+
+[heropy님의 실시간 이미지 리사이징 블로그(미적용)](https://heropy.blog/2019/07/21/resizing-images-cloudfrount-lambda/)

@@ -4,7 +4,7 @@ import renderHome from './render/renderHome'
 import renderDetail from './render/renderDetail'
 import renderAbout from './render/renderAbout'
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 6060
 const app = express()
 
 // Content-Encoding : gzip을 설정하고, 웹 서버에서 클라이언트에게 보낼 파일을 압축합니다.
@@ -16,7 +16,6 @@ app.use(express.static('public'))
 
 // * Home 페이지로 이동합니다.
 app.use('/', (req, res) => {
-  // todo : 이 곳에 어던 페이지에서 render를 요청했다는 코드가 들어가야합니다. 그래야 페이지마다 SSR이 가능합니다.
   if (req.path.endsWith('/')) {
     return renderHome(req.url, req, res)
   }

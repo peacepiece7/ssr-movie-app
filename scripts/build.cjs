@@ -4,7 +4,6 @@ const path = require('path')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
 const webpackNodeExternals = require('webpack-node-externals')
-// * js는 차후 optimization할 예정입니다.
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
