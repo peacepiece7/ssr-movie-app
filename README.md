@@ -6,11 +6,11 @@
 
 # ❗ 필수
 
-- <input type="checkbox" class="task-list-item-checkbox" checked /> 영화 제목으로 검색이 가능해야 합니다!
-- <input type="checkbox" checked> 검색된 결과의 영화 목록이 출력돼야 합니다!
-<input type="checkbox" checked> 단일 영화의 상세정보(제목, 개봉연도, 평점, 장르, 감독, 배우, 줄거리, 포스터 등)를 볼 수 있어야 합니다!
-<li><input type="checkbox" checked> 실제 서비스로 배포하고 접근 가능한 링크를 추가해야 합니다.</li>
-<li><input type="checkbox" class="task-list-item-checkbox" checked /> 실제 서비스로 배포하고 접근 가능한 링크를 추가해야 합니다.</li>
+- [x] 영화 제목으로 검색이 가능해야 합니다!
+- [x] 검색된 결과의 영화 목록이 출력돼야 합니다!
+- [x] 단일 영화의 상세정보(제목, 개봉연도, 평점, 장르, 감독, 배우, 줄거리, 포스터 등)를 볼 수 있어야 합니다!
+- [x]:enabled 실제 서비스로 배포하고 접근 가능한 링크를 추가해야 합니다.</li>
+- [x]:enable실제 서비스로 배포하고 접근 가능한 링크를 추가해야 합니다.</li>
 
 # 선택
 
