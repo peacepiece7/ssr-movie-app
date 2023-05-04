@@ -11,16 +11,16 @@ function getYearOptions() {
   return yearOptions
 }
 
-export default function Search({ onSearch }) {
+export default function Search({ onSubmitSearchForm }) {
   const [year, setYear] = useState('')
   const [text, setText] = useState('')
   const [genre, setGenre] = useState('')
 
   const yearOptions = useMemo(() => getYearOptions(), [])
 
-  const handleSubmitSearchForm = (e) => {
+  const handleOnSubmitSearchForm = (e) => {
     e.preventDefault()
-    onSearch(`s=${encodeURIComponent(text)}${year ? `&y=${year}` : ''}${genre ? `&type=${genre}` : ''}`)
+    onSubmitSearchForm(`s=${encodeURIComponent(text)}${year ? `&y=${year}` : ''}${genre ? `&type=${genre}` : ''}`)
   }
 
   const setInputText = (e) => {
@@ -34,7 +34,7 @@ export default function Search({ onSearch }) {
     setYear(() => e.target.value.trim())
   }
   return (
-    <form onSubmit={handleSubmitSearchForm} className="flex flex-wrap justify-start content-center h-fit text-sm">
+    <form onSubmit={handleOnSubmitSearchForm} className="flex flex-wrap justify-start content-center h-fit text-sm">
       <input
         type="text"
         onChange={setInputText}
@@ -86,5 +86,5 @@ export default function Search({ onSearch }) {
 }
 
 Search.propTypes = {
-  onSearch: PropTypes.func.isRequired,
+  onSubmitSearchForm: PropTypes.func.isRequired,
 }

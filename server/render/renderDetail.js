@@ -6,8 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 
 import App from '../../src/App'
 import { MovieProvider } from '../../src/context/movieContext'
-import { getMovieDetailById } from '../../service/api'
-import { ABORT_DELAY } from '../delays'
+import getMovieDetailById from '../../service/api'
 
 dotenv.config()
 
@@ -111,5 +110,5 @@ export default async function renderDetail(url, req, res) {
     },
   )
   // 충분한 시간이(현제 10초) 지나면 SSR을 포기하고 CSR으로 전환합니다.
-  setTimeout(() => stream.abort(), ABORT_DELAY)
+  setTimeout(() => stream.abort(), 10000)
 }

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../layouts/Layout'
-import { getSearchInfitieMovies } from '../query/query'
+import { getMoviesUsingInfiteQuery } from '../query/query'
 import Search from '../components/Search'
 import SearchList from '../components/SearchList'
 import Spinner from '../components/Spinner'
-import useScollDown from '../hooks/useScollDown'
+import useScoll from '../hooks/useScroll'
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [isBottom] = useScollDown()
+  const [isBottom] = useScoll()
   const {
     data: movies,
     isLoading,
@@ -16,9 +16,9 @@ export default function Home() {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = getSearchInfitieMovies(searchQuery)
+  } = getMoviesUsingInfiteQuery(searchQuery)
 
-  const handleOnSearch = (query) => {
+  const getSearchQuery = (query) => {
     setSearchQuery(query)
   }
 
@@ -44,7 +44,7 @@ export default function Home() {
             If you find this service useful, please consider making a one-time donation or become a patron.
           </p>
         </div>
-        <Search onSearch={handleOnSearch} />
+        <Search onSubmitSearchForm={getSearchQuery} />
         <section>
           <h2 className="text-2xl text-c-tt tracking-widest mt-4 mb-2">Search List</h2>
           <div className="relative min-h-[240px] bg-[#fff] p-2 rounded-lg shadow-md">

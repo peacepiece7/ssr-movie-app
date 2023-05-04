@@ -1,8 +1,11 @@
 import express from 'express'
 import compress from 'compression'
+import dotenv from 'dotenv'
 import renderHome from './render/renderHome'
 import renderDetail from './render/renderDetail'
 import renderAbout from './render/renderAbout'
+
+dotenv.config()
 
 const PORT = process.env.PORT || 6060
 const app = express()

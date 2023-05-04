@@ -1,17 +1,14 @@
 import React from 'react'
 import { renderToPipeableStream } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
-import dotenv from 'dotenv'
+
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import App from '../../src/App'
-import { ABORT_DELAY } from '../delays'
 /**
  * * react-router-dom ssr, csr
  * * StaticRouter(서버 라우터) == BrowserRouter(클라이언트 라우터)
  */
-
-dotenv.config()
 
 const assets = {
   'main.js': '/main.js',
@@ -95,7 +92,7 @@ export default async function renderHome(url, req, res) {
     },
   )
   // 충분한 시간이(현제 10초) 지나면 SSR을 포기하고 CSR으로 전환합니다.
-  setTimeout(() => stream.abort(), ABORT_DELAY)
+  setTimeout(() => stream.abort(), 10000)
 }
 
 /*

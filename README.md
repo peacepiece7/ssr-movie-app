@@ -1,8 +1,6 @@
 # Move App Challenge
 
-# 데모 보기
-
-[DEMO](http://ec2-3-84-213-170.compute-1.amazonaws.com) (https적용 안했습니다!)
+[결과물 보기](http://ec2-3-84-213-170.compute-1.amazonaws.com) (https적용 안했습니다!)
 
 # ❗ 필수
 

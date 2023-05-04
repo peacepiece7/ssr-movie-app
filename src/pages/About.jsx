@@ -2,7 +2,6 @@ import React from 'react'
 
 import Layout from '../layouts/Layout'
 
-// https://avatars.githubusercontent.com/u/73880776?s=400&u=1ce40dd704a71a9f5ce3f80cbf19092032f2df14&v=4
 export default function About() {
   return (
     <Layout>

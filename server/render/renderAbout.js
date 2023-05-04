@@ -5,7 +5,6 @@ import dotenv from 'dotenv'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import App from '../../src/App'
-import { ABORT_DELAY } from '../delays'
 
 dotenv.config()
 
@@ -72,5 +71,5 @@ export default async function renderAbout(url, req, res) {
       },
     },
   )
-  setTimeout(() => stream.abort(), ABORT_DELAY)
+  setTimeout(() => stream.abort(), 10000)
 }

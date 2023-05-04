@@ -14,7 +14,7 @@ import Layout from '../layouts/Layout'
  * @property {string} Director
  * @property {string} Writer
  * @property {string} Actors
- * @property {string} Plotd
+ * @property {string} Plot
  * @property {string} Language
  * @property {string} Country
  * @property {string} Awards
