@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../layouts/Layout'
-import { getMoviesUsingInfiteQuery } from '../query/query'
+import getMoviesUsingInfiteQuery from '../query/query'
 import Search from '../components/Search'
 import SearchList from '../components/SearchList'
 import Spinner from '../components/Spinner'

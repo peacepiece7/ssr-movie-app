@@ -1,27 +1,8 @@
 import axios from 'axios'
 
-import { useQuery, useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from 'react-query'
 
-export const getMovieDetailById = (id) =>
-  useQuery(['detail', id], async () => {
-    try {
-      // page수 만큼 api요청 보내는 queue 만들어야 함
-      const { data } = await axios({
-        url: `https://omdbapi.com/?apikey=7035c60c&i=${id}&plot=full`,
-        method: 'GET',
-      })
-
-      if (data.Error) {
-        return []
-      }
-      return data
-    } catch (err) {
-      console.error('getMovieDetailById ERROR : ', err)
-      return []
-    }
-  })
-
-export const getMoviesUsingInfiteQuery = (query) =>
+const getMoviesUsingInfiteQuery = (query) =>
   useInfiniteQuery(
     [`2${query}`],
     async ({ pageParam = 1 }) => {
@@ -50,3 +31,5 @@ export const getMoviesUsingInfiteQuery = (query) =>
       },
     },
   )
+
+export default getMoviesUsingInfiteQuery
