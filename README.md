@@ -19,18 +19,20 @@ React18의 Steaming SSR은 서버 컴포넌트의 랜더링이 비동기적으�
 이를 활용할 생각이였으나 해결하지 못한 부분이 있습니다.
 
 /detail 페이지로 요청이 들어올 떄, 서버에서 OMDB로 API를 보냅니다. 
-이떄 서버 컴포넌트는 로딩창(fallback)을 클라이언트에 제공하도록 만들고 싶은데
+
+이떄 서버 컴포넌트는 로딩창(fallback)을 클라이언트에 제공하도록 만들고 싶었습니다. 
+
+즉 streaming SSR로 특정 컴포넌트만 hydration을 늦게하고, api결과가 도착할때까지 해당 컴포넌트가 로딩화면을 보여주도록 하고싶었는데요.
+
+서버에서 데이터 패칭시 원본을 클라이언트에 알릴 방법이 api 응답 결과를 문자열로 직렬화하여 html파일에 삽입하는 방식을 사용하고 있었기 때문에
+
+서버는 useContext내에서 promise<pending>을 반환지 않게됩니다.
+
+이렇게 서버에서 promise<pending>을 반환하지 않고 api 응답 결과를 기다렸다가 완성된 html파일을 보내는 방식은 로딩화면을 보여줄 수가 없습니다.
 
 
-서버에서 데이터 패칭시 원본을 클라이언트에 알릴 방법이 api 응답 결과를 문자열로 직렬화하여 html파일에 삽입하는 방식이 제일 효율적이라고 생각했습니다.
-이렇게 서버에서 promise<pending>을 반환하지 않고 api 응답 결과를 기다리는 방식은 로딩창을 보여줄 수 없습니다.
+[이 데모처럼 *.server.js, *.client.js](https://github.com/reactjs/server-components-demo)로 아예 베타 
 
-
-
-
-그래서 nextjs12 버전에서 SSR하는 방식으로 대체 해놓은 상태입니다.
-
-[](https://github.com/reactjs/server-components-demo)
 
 # Reference
 
