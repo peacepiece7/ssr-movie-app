@@ -31,7 +31,9 @@ React18의 Steaming SSR은 서버 컴포넌트의 랜더링이 비동기적으�
 이렇게 서버에서 promise<pending>을 반환하지 않고 api 응답 결과를 기다렸다가 완성된 html파일을 보내는 방식은 로딩화면을 보여줄 수가 없습니다.
 
 
-[이 데모처럼 *.server.js, *.client.js](https://github.com/reactjs/server-components-demo)로 아예 베타 
++내가 왜 RSC안해봤는지 까먹을까봐 적어놓는 글 
+[이 데모처럼](https://github.com/reactjs/server-components-demo) *.server.js, *.client.js를 만들고, 서버 컴포넌트를 구분하는 방식을 적용해보고 싶었는데
+개념만 이해하면 충분하고, nextjs 13번으로 RSC를 체험해보면 충분하다 생각했었습니다.
 
 
 # Reference
