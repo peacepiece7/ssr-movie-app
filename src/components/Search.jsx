@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
+import { MIN_YEAR } from '../constants'
 
 function getYearOptions() {
   const date = new Date()
   let year = date.getFullYear()
   const yearOptions = []
-  while (year >= 1985) {
+  while (year >= MIN_YEAR) {
     yearOptions.push(year--)
   }
   return yearOptions

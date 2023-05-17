@@ -36,15 +36,15 @@ import Layout from '../layouts/Layout'
  */
 
 export default function Detail() {
+  const movie = useMoviesData()
   /**
-   * @type {movieDetail}
+   * @type {movieDetail | null}
    */
-  let movie = useMoviesData()
-  movie = movie ? JSON.parse(htmlEntitiesDecoder(movie)) : ''
-  if (!movie) {
+  const movieData = movie ? JSON.parse(htmlEntitiesDecoder(movie)) : null
+
+  if (movieData === null) {
     return <div>Empty plz check the movie</div>
   }
-
   return (
     <Layout>
       <main className="flex md:flex-row md:justify-center md:items-stretch flex-col items-center">
@@ -52,12 +52,14 @@ export default function Detail() {
           <div className="md:mr-8 text-right">
             <picture>
               <source
-                srcSet={movie.Poster === 'N/A' ? '/noImage.png' : movie.Poster.replace('._V1_SX300.', '._V1_SX700.')}
+                srcSet={
+                  movieData.Poster === 'N/A' ? '/noImage.png' : movieData.Poster.replace('._V1_SX300.', '._V1_SX700.')
+                }
                 media="(min-width: 768px)"
               />
               <img
-                src={movie.Poster === 'N/A' ? '/noImage.png' : movie.Poster}
-                alt={`${movie.Title} Poster`}
+                src={movieData.Poster === 'N/A' ? '/noImage.png' : movieData.Poster}
+                alt={`${movieData.Title} Poster`}
                 onError={(e) => {
                   e.target.src = '/noImage.png'
                 }}

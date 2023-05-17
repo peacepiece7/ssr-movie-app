@@ -7,7 +7,7 @@ import Spinner from './components/Spinner'
 import Home from './pages/Home'
 import About from './pages/About'
 
-const Detail = lazy(() => import('./pages/Detail'))
+const Detail = lazy(() => import('./pages/Detail.jsx'))
 
 export default function App() {
   return (
@@ -16,11 +16,11 @@ export default function App() {
       <Route
         path="/detail"
         element={
-          <Suspense fallback={<Spinner />}>
-            <ErrorBoundary fallback={<Error />}>
+          <ErrorBoundary fallback={<Error />}>
+            <Suspense fallback={<Spinner />}>
               <Detail />
-            </ErrorBoundary>
-          </Suspense>
+            </Suspense>
+          </ErrorBoundary>
         }
       />
       <Route path="/about" element={<About />} />

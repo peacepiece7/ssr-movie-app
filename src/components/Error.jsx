@@ -1,19 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-export default function Error({ error }) {
+export default function Error() {
   return (
     <div>
       <h1>Application Error</h1>
-      <pre className="whitespace-pre-wrap">{error.stack}</pre>
     </div>
   )
-}
-
-Error.propTypes = {
-  error: PropTypes.shape({
-    stack: PropTypes.string,
-    name: PropTypes.string,
-    message: PropTypes.string,
-  }).isRequired,
 }

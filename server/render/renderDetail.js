@@ -15,6 +15,31 @@ const assets = {
   'main.css': '/main.css',
 }
 
+function createDelay(ms) {
+  let done = false
+  let promise = null
+  let testData = ''
+  return {
+    read() {
+      if (done) {
+        return testData
+      }
+      if (promise) {
+        throw promise
+      }
+      promise = new Promise((resolve) => {
+        setTimeout(() => {
+          done = true
+          promise = null
+          testData = 'foo'
+          resolve()
+        }, ms)
+      })
+      throw promise
+    },
+  }
+}
+
 /**
  * @param {string} url
  * @param {import('express').Request} req
@@ -26,13 +51,16 @@ export default async function renderDetail(url, req, res) {
   })
   let didError = false
 
-  const data = {
+  // react 18의 suspense를 사용해보기 위해 인위적으로 1.5초의 딜레이를 줍니다.
+  const delay = createDelay(1500)
+  const ctx = {
+    delay,
     data: '',
   }
 
   const movieDetailData = await getMovieDetailById(req.query.id)
 
-  movieDetailData.Ratings.map((rating) => {
+  movieDetailData.Ratings?.map((rating) => {
     switch (rating.Source) {
       case 'Internet Movie Database':
         rating.SourceImage = '/imdb_icon.png'
@@ -49,12 +77,13 @@ export default async function renderDetail(url, req, res) {
     }
     return rating
   })
-  data.data = JSON.stringify(movieDetailData)
+  ctx.data = JSON.stringify(movieDetailData)
+  ctx.data = ''
 
   const queryClient = new QueryClient()
 
   const stream = renderToPipeableStream(
-    <MovieProvider data={data}>
+    <MovieProvider data={ctx}>
       <QueryClientProvider client={queryClient}>
         <html lang="en">
           <head>
@@ -80,9 +109,9 @@ export default async function renderDetail(url, req, res) {
               <App assets={assets} />
             </StaticRouter>
           </div>
-          {data.data && (
+          {ctx.data && (
             <script id="__SERVER_DATA__" type="application/json">
-              {data.data}
+              {ctx.data}
             </script>
           )}
           <script

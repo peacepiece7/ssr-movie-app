@@ -12,7 +12,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'no-console': 'warn', // console 사용시 warning이 나타납니다. (production할 떄 지워줘야하니까 warn합니다.)
+    'no-console': 'warn', // console 사용시 warning이 나타납니다. (production모드일떄 지워줘야하니까 warn합니다.)
     'linebreak-style': 'off', // crlf, lf 상관없도록 변경합니다. (윈도우, 맥 번갈아서 쓰고 있습니다.)
     semi: ['error', 'never'], // semicolon을 제거합니다.
     'no-underscore-dangle': ['warn', { allowAfterThis: true }], // this._bar()는 가능하고 그 외는 warning이 나타납니다.
